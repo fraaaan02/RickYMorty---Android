@@ -1,6 +1,8 @@
 package com.fjlr.rickymortyapi
 
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -53,10 +55,36 @@ class MainActivity : AppCompatActivity() {
 
     private fun buildTemporadas() {
         CoroutineScope(Dispatchers.IO).launch {
-            val temporada = getRetrofit().create(EpisodeApi::class.java).getTemporadas()
-            val temporadaSize = (1..temporada.results.size).toList()
+            try {
+                val temporada = getRetrofit().create(EpisodeApi::class.java).getTemporadas()
 
+                if (temporada.results.isNotEmpty()) {
+                    val e = temporada.results.size
+                    val temporadaSize = (1..e).toList()
 
+                    launch(Dispatchers.Main) {
+                        val spinnerAdapter = ArrayAdapter(
+                            this@MainActivity,
+                            android.R.layout.simple_spinner_item,
+                            temporadaSize
+                        )
+                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        binding.spinnerTemporada.adapter = spinnerAdapter
+                    }
+                } else {
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Error al cargar las temporadas",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Error al cargar las temporadas",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
