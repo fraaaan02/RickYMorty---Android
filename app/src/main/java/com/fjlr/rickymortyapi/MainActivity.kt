@@ -33,10 +33,12 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        //Go to Episodes Activity
         binding.btTemporadas.setOnClickListener {
             startActivity(Intent(this, EpisodiosActivity::class.java))
         }
 
+        //Go to Ajustes Activity
         binding.btAjustes.setOnClickListener {
             startActivity(Intent(this, AjustesActivity::class.java))
         }

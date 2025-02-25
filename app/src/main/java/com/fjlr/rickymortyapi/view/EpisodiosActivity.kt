@@ -179,7 +179,7 @@ class EpisodiosActivity : AppCompatActivity() {
      */
     private fun goToMain(){
         binding.btVolverEpisodio.setOnClickListener {
-            onBackPressed()
+            finish()
         }
     }
 

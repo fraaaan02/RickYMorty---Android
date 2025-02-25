@@ -9,11 +9,13 @@ import androidx.core.view.WindowInsetsCompat
 import com.fjlr.rickymortyapi.databinding.ActivityAjustesBinding
 import com.fjlr.rickymortyapi.model.preferences.UserApplication.Companion.preferencias
 
+/**
+ * Ajustes Class
+ */
 class AjustesActivity : AppCompatActivity() {
 
     //ATTRIBUTES
     private lateinit var binding: ActivityAjustesBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +31,23 @@ class AjustesActivity : AppCompatActivity() {
             insets
         }
 
-
+        isSave()
         goToMain()
         activacionSwich()
 
     }
 
+    /**
+     * Check if the switch is enabled or not and update the icon
+     */
+    private fun isSave() {
+        binding.smModoOscuro.isChecked = preferencias.fetchOscureMode()
+    }
+
+
+    /**
+     * Is activated the switch to enable dark mode or not
+     */
     private fun activacionSwich() {
         binding.smModoOscuro.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -48,6 +61,9 @@ class AjustesActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Enable Dark Mode
+     */
     private fun enableDarkMode() {
         AppCompatDelegate.setDefaultNightMode(
             AppCompatDelegate.MODE_NIGHT_YES
@@ -56,6 +72,9 @@ class AjustesActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Disable Dark Mode
+     */
     private fun disbleDarkMode() {
         AppCompatDelegate.setDefaultNightMode(
             AppCompatDelegate.MODE_NIGHT_NO
@@ -69,7 +88,7 @@ class AjustesActivity : AppCompatActivity() {
      */
     private fun goToMain() {
         binding.btVolverAjustes.setOnClickListener {
-            onBackPressed()
+            finish()
         }
     }
 
