@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RickYMortyAPI</string>
+    <string name="selecciona_una_temporada">Selecciona una temporada:</string>
+    <string name="bienvenido_rickymorty_api">Bienvenido RickYMorty API</string>
+    <string name="temporadas">Temporadas</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="modo_oscuro">Modo Oscuro:</string>
+    <string name="volver">Volver</string>
 </resources>
