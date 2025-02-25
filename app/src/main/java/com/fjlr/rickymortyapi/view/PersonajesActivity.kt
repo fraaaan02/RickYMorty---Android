@@ -9,7 +9,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fjlr.rickymortyapi.databinding.ActivityPersonajesBinding
 import com.fjlr.rickymortyapi.model.adapter.PersonajeAdapter
-import com.fjlr.rickymortyapi.model.api.EpisodeApi
 import com.fjlr.rickymortyapi.model.api.PersonajeApi
 import com.fjlr.rickymortyapi.model.data.Characters
 import kotlinx.coroutines.CoroutineScope
