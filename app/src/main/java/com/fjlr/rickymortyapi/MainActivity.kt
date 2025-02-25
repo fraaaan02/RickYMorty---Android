@@ -1,5 +1,6 @@
 package com.fjlr.rickymortyapi
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -14,14 +15,20 @@ import com.fjlr.rickymortyapi.databinding.ActivityMainBinding
 import com.fjlr.rickymortyapi.model.adapter.EpisodeAdapter
 import com.fjlr.rickymortyapi.model.api.EpisodeApi
 import com.fjlr.rickymortyapi.model.data.Episode
+import com.fjlr.rickymortyapi.view.PersonajesActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * MAIN CLASS
+ * @author Francisco Joaquin Lopez Ros
+ */
 class MainActivity : AppCompatActivity() {
 
+    //ATTRIBUTES
     private lateinit var binding: ActivityMainBinding
     private lateinit var episodeAdapter: EpisodeAdapter
     private var episodes = mutableListOf<Episode>()
@@ -30,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        //BINDING
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
 
         initRecyclerView()
         buildTemporadas()
@@ -48,9 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Initialize recyclerView
+     * Collect the episode selected
      */
     private fun initRecyclerView() {
-        episodeAdapter = EpisodeAdapter(episodes)
+        episodeAdapter = EpisodeAdapter(episodes) { onclickListener(it) }
 
         binding.recyclerViewEpisode.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewEpisode.adapter = episodeAdapter
@@ -114,7 +124,8 @@ class MainActivity : AppCompatActivity() {
 
 
     /**
-     *
+     * Collect the episode with the season selected (this format: S0X)
+     * Add the episodes in the recyclerView, clear the episodes when change the season and notify
      */
     private fun buildEpisodes(temporada: Int) {
         CoroutineScope(Dispatchers.IO).launch {
@@ -142,16 +153,32 @@ class MainActivity : AppCompatActivity() {
 
 
     /**
-     *
+     * Load the episode from season selected
      */
     private fun loadEpisode() {
-        binding.spinnerTemporada.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                buildEpisodes(position + 1)
-            }
+        binding.spinnerTemporada.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    buildEpisodes(position + 1)
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+    }
+
+
+    /**
+     * Go to detailed activity and send the ID the episode selected
+     */
+    private fun onclickListener(episode: Episode) {
+        val intent = Intent(this, PersonajesActivity::class.java)
+        intent.putExtra("ID", episode.id)
+        startActivity(intent)
     }
 
 }
