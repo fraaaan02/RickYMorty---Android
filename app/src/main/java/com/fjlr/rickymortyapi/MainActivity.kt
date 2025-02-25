@@ -1,6 +1,8 @@
 package com.fjlr.rickymortyapi
 
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -39,8 +41,14 @@ class MainActivity : AppCompatActivity() {
 
         initRecyclerView()
         buildTemporadas()
+
+
     }
 
+
+    /**
+     * Initialize recyclerView
+     */
     private fun initRecyclerView() {
         episodeAdapter = EpisodeAdapter(episodes)
 
@@ -48,43 +56,102 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerViewEpisode.adapter = episodeAdapter
     }
 
+
+    /**
+     * Toast for default
+     */
+    private fun defaultToast(text: String) {
+        Toast.makeText(
+            this@MainActivity,
+            text,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+
+    /**
+     * Build Retrofit with the URL RickYMorty
+     */
     private fun getRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl("https://rickandmortyapi.com/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+
+    /**
+     * Collect the all episode E01 and add the list the spinner
+     * Show the episodes of the first season (1 spinner position)
+     */
     private fun buildTemporadas() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val temporada = getRetrofit().create(EpisodeApi::class.java).getTemporadas()
 
                 if (temporada.results.isNotEmpty()) {
-                    val e = temporada.results.size
-                    val temporadaSize = (1..e).toList()
 
                     launch(Dispatchers.Main) {
                         val spinnerAdapter = ArrayAdapter(
                             this@MainActivity,
                             android.R.layout.simple_spinner_item,
-                            temporadaSize
+                            (1..temporada.results.size).toList()
                         )
                         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                         binding.spinnerTemporada.adapter = spinnerAdapter
+
+                        loadEpisode()
+
                     }
                 } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Error al cargar las temporadas",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    defaultToast("Error al cargar las temporadas")
                 }
             } catch (e: Exception) {
-                Toast.makeText(
-                    this@MainActivity,
-                    "Error al cargar las temporadas",
-                    Toast.LENGTH_SHORT
-                ).show()
+                launch(Dispatchers.Main) {
+                    defaultToast("Error al cargar las temporadas")
+                }
             }
         }
     }
+
+
+    /**
+     *
+     */
+    private fun buildEpisodes(temporada: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val temporadaFormat = "S%02d".format(temporada)
+
+                val episodios = getRetrofit()
+                    .create(EpisodeApi::class.java)
+                    .getEpisodesForSeason(temporadaFormat)
+
+                if (episodios.results.isNotEmpty()) {
+                    launch(Dispatchers.Main) {
+                        episodes.clear()
+                        episodes.addAll(episodios.results)
+                        episodeAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                    launch(Dispatchers.Main) { defaultToast("No hay episodios en esta temporada") }
+                }
+            } catch (e: Exception) {
+                launch(Dispatchers.Main) { defaultToast("Error al cargar los episodios") }
+            }
+        }
+    }
+
+
+    /**
+     *
+     */
+    private fun loadEpisode() {
+        binding.spinnerTemporada.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                buildEpisodes(position + 1)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+    }
+
 }

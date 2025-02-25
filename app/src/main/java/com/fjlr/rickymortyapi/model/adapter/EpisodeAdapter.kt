@@ -8,7 +8,7 @@ import com.fjlr.rickymortyapi.R
 import com.fjlr.rickymortyapi.databinding.ItemEpisodioBinding
 import com.fjlr.rickymortyapi.model.data.Episode
 
-class EpisodeAdapter(private val episodes: List<Episode>) :
+class EpisodeAdapter(private var episodes: List<Episode>) :
     RecyclerView.Adapter<EpisodeAdapter.EpisodeAdapterViewHolder>() {
 
     inner class EpisodeAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
