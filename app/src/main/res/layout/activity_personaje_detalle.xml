@@ -35,8 +35,8 @@
 
     <ImageView
         android:id="@+id/ivImagenPersonaje"
-        android:layout_width="116dp"
-        android:layout_height="106dp"
+        android:layout_width="160dp"
+        android:layout_height="139dp"
         android:layout_marginTop="56dp"
         android:contentDescription="@string/imagen_del_personaje"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +46,10 @@
 
     <TextView
         android:id="@+id/tvPersonajeName"
-        android:layout_width="148dp"
-        android:layout_height="36dp"
+        android:layout_width="183dp"
+        android:layout_height="61dp"
         android:layout_marginTop="20dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +58,10 @@
 
     <TextView
         android:id="@+id/tvPersonajeEstado"
-        android:layout_width="148dp"
-        android:layout_height="36dp"
+        android:layout_width="183dp"
+        android:layout_height="61dp"
         android:layout_marginTop="20dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,9 +70,10 @@
 
     <TextView
         android:id="@+id/tvPersonajeLugar"
-        android:layout_width="148dp"
-        android:layout_height="36dp"
+        android:layout_width="183dp"
+        android:layout_height="61dp"
         android:layout_marginTop="28dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,9 +82,10 @@
 
     <TextView
         android:id="@+id/tvPersonajeUrl"
-        android:layout_width="148dp"
-        android:layout_height="36dp"
+        android:layout_width="183dp"
+        android:layout_height="61dp"
         android:layout_marginTop="20dp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"

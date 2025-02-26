@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fjlr.rickymortyapi.databinding.ActivityAjustesBinding
 import com.fjlr.rickymortyapi.model.preferences.UserApplication.Companion.preferencias
+import com.fjlr.rickymortyapi.util.GoBack
 
 /**
  * Ajustes Class
@@ -32,7 +33,7 @@ class AjustesActivity : AppCompatActivity() {
         }
 
         isSave()
-        goToMain()
+        GoBack.goToMain(this, binding.btVolverAjustes)
         activacionSwich()
 
     }
@@ -80,16 +81,6 @@ class AjustesActivity : AppCompatActivity() {
             AppCompatDelegate.MODE_NIGHT_NO
         )
         delegate.applyDayNight()
-    }
-
-
-    /**
-     * Go to Main Activity
-     */
-    private fun goToMain() {
-        binding.btVolverAjustes.setOnClickListener {
-            finish()
-        }
     }
 
 }

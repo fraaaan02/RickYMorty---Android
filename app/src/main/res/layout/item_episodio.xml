@@ -15,20 +15,22 @@
 
         <TextView
             android:id="@+id/tvNombreEpisodio"
-            android:layout_width="139dp"
-            android:layout_height="34dp"
+            android:layout_width="255dp"
+            android:layout_height="57dp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvEpisodio"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Nombre Episodio" />
 
         <TextView
             android:id="@+id/tvEpisodio"
-            android:layout_width="139dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="84dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

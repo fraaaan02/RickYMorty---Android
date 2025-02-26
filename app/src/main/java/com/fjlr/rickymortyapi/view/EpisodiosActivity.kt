@@ -15,12 +15,12 @@ import com.fjlr.rickymortyapi.databinding.ActivityEpisodiosBinding
 import com.fjlr.rickymortyapi.model.adapter.EpisodeAdapter
 import com.fjlr.rickymortyapi.model.api.EpisodeApi
 import com.fjlr.rickymortyapi.model.data.Episode
+import com.fjlr.rickymortyapi.util.GoBack
+import com.fjlr.rickymortyapi.util.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class EpisodiosActivity : AppCompatActivity() {
 
@@ -43,7 +43,7 @@ class EpisodiosActivity : AppCompatActivity() {
             insets
         }
 
-        goToMain()
+        GoBack.goToMain(this, binding.btVolverEpisodio)
         initRecyclerView()
         buildTemporadas()
 
@@ -60,28 +60,6 @@ class EpisodiosActivity : AppCompatActivity() {
         binding.recyclerViewEpisode.adapter = episodeAdapter
     }
 
-
-    /**
-     * Toast for default
-     */
-    private fun defaultToast(text: String) {
-        Toast.makeText(
-            this@EpisodiosActivity,
-            text,
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-
-    /**
-     * Build Retrofit with the URL RickYMorty
-     */
-    private fun getRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://rickandmortyapi.com/api/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-
     /**
      * Collect the all episode E01 and add the list the spinner
      * Show the episodes of the first season (1 spinner position)
@@ -89,7 +67,8 @@ class EpisodiosActivity : AppCompatActivity() {
     private fun buildTemporadas() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val temporada = getRetrofit().create(EpisodeApi::class.java).getTemporadas()
+                val temporada =
+                    RetrofitClient.instance.create(EpisodeApi::class.java).getTemporadas()
                 withContext(Dispatchers.Main) {
 
                     if (temporada.results.isNotEmpty()) {
@@ -105,12 +84,22 @@ class EpisodiosActivity : AppCompatActivity() {
                         loadEpisode()
 
                     } else {
-                        defaultToast("Error al cargar las temporadas")
+                        launch(Dispatchers.Main) {
+                            Toast.makeText(
+                                this@EpisodiosActivity,
+                                "Error al cargar las temporadas",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             } catch (e: Exception) {
                 launch(Dispatchers.Main) {
-                    defaultToast("Error al cargar las temporadas")
+                    Toast.makeText(
+                        this@EpisodiosActivity,
+                        "Error al cargar las temporadas",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -126,7 +115,7 @@ class EpisodiosActivity : AppCompatActivity() {
             try {
                 val temporadaFormat = "S%02d".format(temporada)
 
-                val episodios = getRetrofit()
+                val episodios = RetrofitClient.instance
                     .create(EpisodeApi::class.java)
                     .getEpisodesForSeason(temporadaFormat)
 
@@ -137,10 +126,22 @@ class EpisodiosActivity : AppCompatActivity() {
                         episodeAdapter.notifyDataSetChanged()
                     }
                 } else {
-                    launch(Dispatchers.Main) { defaultToast("No hay episodios en esta temporada") }
+                    launch(Dispatchers.Main) {
+                        Toast.makeText(
+                            this@EpisodiosActivity,
+                            "No hay episodios en esta temporada",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             } catch (e: Exception) {
-                launch(Dispatchers.Main) { defaultToast("Error al cargar los episodios") }
+                launch(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@EpisodiosActivity,
+                        "Error al cargar los episodios",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -173,15 +174,6 @@ class EpisodiosActivity : AppCompatActivity() {
         val intent = Intent(this, PersonajesActivity::class.java)
         intent.putExtra("ID", episode.id)
         startActivity(intent)
-    }
-
-    /**
-     * Go to Main Activity
-     */
-    private fun goToMain() {
-        binding.btVolverEpisodio.setOnClickListener {
-            finish()
-        }
     }
 
 }

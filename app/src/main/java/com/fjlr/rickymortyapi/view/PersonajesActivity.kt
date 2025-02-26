@@ -2,7 +2,6 @@ package com.fjlr.rickymortyapi.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,14 +12,14 @@ import com.fjlr.rickymortyapi.databinding.ActivityPersonajesBinding
 import com.fjlr.rickymortyapi.model.adapter.PersonajeAdapter
 import com.fjlr.rickymortyapi.model.api.PersonajeApi
 import com.fjlr.rickymortyapi.model.data.Characters
+import com.fjlr.rickymortyapi.util.GoBack
+import com.fjlr.rickymortyapi.util.RetrofitClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * Characters Activity
@@ -46,7 +45,7 @@ class PersonajesActivity : AppCompatActivity() {
             insets
         }
 
-        goToMain()
+        GoBack.goToMain(this, binding.btVolverPersonaje)
         initRecyclerView()
         loadCharacters()
     }
@@ -72,28 +71,6 @@ class PersonajesActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
-    /**
-     * Toast for default
-     */
-    private fun defaultToast(text: String) {
-        Toast.makeText(
-            this@PersonajesActivity,
-            text,
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-
-    /**
-     * Build Retrofit with the URL RickYMorty
-     */
-    private fun getRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://rickandmortyapi.com/api/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-
     /**
      * Add the list to the recyclerview and the episode data
      *
@@ -104,9 +81,11 @@ class PersonajesActivity : AppCompatActivity() {
     private fun loadCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val episode = getRetrofit()
+                val intent: Int = intent.getIntExtra("ID", -1)
+
+                val episode = RetrofitClient.instance
                     .create(PersonajeApi::class.java)
-                    .getPersonajeForId(getIdIntent())
+                    .getPersonajeForId(intent)
 
                 val personajeIds = episode.characters.map { url ->
                     url.split("/").last().toInt()
@@ -114,7 +93,7 @@ class PersonajesActivity : AppCompatActivity() {
 
                 val deferredPersonajes = personajeIds.map { id ->
                     async(Dispatchers.IO) {
-                        getRetrofit()
+                        RetrofitClient.instance
                             .create(PersonajeApi::class.java)
                             .getDetailPersonaje(id)
                     }
@@ -133,26 +112,14 @@ class PersonajesActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    defaultToast("Error al cargar los Personajes: ${e.message}")
-                    Log.e("ERROR_LOAD_CHARACTERS", e.toString())
+                    Toast.makeText(
+                        this@PersonajesActivity,
+                        "Error al cargar los personajes",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
     }
 
-
-    /**
-     * Catch the Id for the intent
-     */
-    private fun getIdIntent(): Int = intent.getIntExtra("ID", -1)
-
-
-    /**
-     * Go to Main Activity
-     */
-    private fun goToMain() {
-        binding.btVolverPersonaje.setOnClickListener {
-            finish()
-        }
-    }
 }

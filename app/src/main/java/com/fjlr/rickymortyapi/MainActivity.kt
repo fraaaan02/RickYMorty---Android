@@ -58,7 +58,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun setImageForMode(imageView: ImageView, lightImage: Int, darkImage: Int) {
         val modoOscuro = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-        val selectedImage = if (modoOscuro == Configuration.UI_MODE_NIGHT_YES) darkImage else lightImage
+        val selectedImage =
+            if (modoOscuro == Configuration.UI_MODE_NIGHT_YES) darkImage else lightImage
         imageView.setImageResource(selectedImage)
     }
 

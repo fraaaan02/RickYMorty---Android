@@ -8,13 +8,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fjlr.rickymortyapi.databinding.ActivityPersonajeDetalleBinding
 import com.fjlr.rickymortyapi.model.api.PersonajeApi
+import com.fjlr.rickymortyapi.util.GoBack
+import com.fjlr.rickymortyapi.util.RetrofitClient
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class PersonajeDetalleActivity : AppCompatActivity() {
 
@@ -35,7 +35,7 @@ class PersonajeDetalleActivity : AppCompatActivity() {
             insets
         }
 
-        goToMain()
+        GoBack.goToMain(this, binding.btVolverDetalle)
 
         val idPersonaje = intent.getIntExtra("ID", -1)
         if (idPersonaje != -1) {
@@ -50,7 +50,7 @@ class PersonajeDetalleActivity : AppCompatActivity() {
     private fun loadPersonaje(idPersonaje: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val personaje = getRetrofit()
+                val personaje = RetrofitClient.instance
                     .create(PersonajeApi::class.java)
                     .getDetailPersonaje(idPersonaje)
 
@@ -70,25 +70,6 @@ class PersonajeDetalleActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-        }
-    }
-
-
-    /**
-     * Build Retrofit with the URL RickYMorty
-     */
-    private fun getRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl("https://rickandmortyapi.com/api/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-
-    /**
-     * Go to Main Activity
-     */
-    private fun goToMain() {
-        binding.btVolverDetalle.setOnClickListener {
-            finish()
         }
     }
 }
