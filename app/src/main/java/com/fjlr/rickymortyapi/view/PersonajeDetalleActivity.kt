@@ -45,17 +45,6 @@ class PersonajeDetalleActivity : AppCompatActivity() {
     }
 
     /**
-     * Toast for default
-     */
-    private fun defaultToast(text: String) {
-        Toast.makeText(
-            this@PersonajeDetalleActivity,
-            text,
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    /**
      * Collect the character of id and show the details
      */
     private fun loadPersonaje(idPersonaje: Int) {
@@ -74,7 +63,11 @@ class PersonajeDetalleActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    defaultToast("Error al cargar personaje")
+                    Toast.makeText(
+                        this@PersonajeDetalleActivity,
+                        "Error al cargar personaje",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
