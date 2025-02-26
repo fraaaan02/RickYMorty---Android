@@ -22,6 +22,9 @@ import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/**
+ * Characters Activity
+ */
 class PersonajesActivity : AppCompatActivity() {
 
     //ATTRIBUTES
@@ -60,6 +63,9 @@ class PersonajesActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Go to detailed activity and send the ID the character selected
+     */
     private fun onclickListener(personaje: Characters) {
         val intent = Intent(this, PersonajeDetalleActivity::class.java)
         intent.putExtra("ID", personaje.id)
@@ -89,7 +95,11 @@ class PersonajesActivity : AppCompatActivity() {
 
 
     /**
+     * Add the list to the recyclerview and the episode data
      *
+     * Collect the episode with the ID
+     * Catch the ID for characters
+     * Makes requests to the API in parallel, wait and return
      */
     private fun loadCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -110,7 +120,6 @@ class PersonajesActivity : AppCompatActivity() {
                     }
                 }
 
-                // Esperamos a que todas las llamadas finalicen y obtenemos la lista de personajes
                 val personajesList = deferredPersonajes.awaitAll()
 
                 withContext(Dispatchers.Main) {
@@ -132,6 +141,9 @@ class PersonajesActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Catch the Id for the intent
+     */
     private fun getIdIntent(): Int = intent.getIntExtra("ID", -1)
 
 

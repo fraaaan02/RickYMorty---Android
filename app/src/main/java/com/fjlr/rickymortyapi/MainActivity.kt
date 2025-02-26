@@ -16,8 +16,8 @@ import com.fjlr.rickymortyapi.view.EpisodiosActivity
  */
 class MainActivity : AppCompatActivity() {
 
+    //ATTRIBUTES
     private lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatDelegate
 
 class UserApplication : Application() {
 
+    //ATTRIBUTES
     companion object {
         lateinit var preferencias: Preferencias
     }
 
+    /**
+     * Initialize the preferences and check if it is checked
+     */
     override fun onCreate() {
         super.onCreate()
         preferencias = Preferencias(applicationContext)

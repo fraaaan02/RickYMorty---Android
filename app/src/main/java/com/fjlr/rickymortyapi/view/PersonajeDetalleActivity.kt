@@ -55,6 +55,9 @@ class PersonajeDetalleActivity : AppCompatActivity() {
         ).show()
     }
 
+    /**
+     * Collect the character of id and show the details
+     */
     private fun loadPersonaje(idPersonaje: Int) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -78,10 +81,14 @@ class PersonajeDetalleActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * Build Retrofit with the URL RickYMorty
+     */
     private fun getRetrofit(): Retrofit = Retrofit.Builder()
         .baseUrl("https://rickandmortyapi.com/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+
 
     /**
      * Go to Main Activity
