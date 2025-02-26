@@ -1,7 +1,9 @@
 package com.fjlr.rickymortyapi
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -42,6 +44,21 @@ class MainActivity : AppCompatActivity() {
         binding.btAjustes.setOnClickListener {
             startActivity(Intent(this, AjustesActivity::class.java))
         }
+
+        imageNight()
+
+    }
+
+    private fun imageNight(){
+        val imageView: ImageView = binding.fotoBeth
+        val modoOscuro = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+        if (modoOscuro == Configuration.UI_MODE_NIGHT_YES) {
+            imageView.setImageResource(R.drawable.bethnight) // Imagen con mejor contraste
+        } else {
+            imageView.setImageResource(R.drawable.beth) // Imagen normal
+        }
+
     }
 
 }

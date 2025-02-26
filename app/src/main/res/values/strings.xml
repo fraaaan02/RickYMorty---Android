@@ -8,4 +8,9 @@
     <string name="volver">Volver</string>
     <string name="imagen_del_personaje">Imagen del personaje</string>
     <string name="personajes">Personajes</string>
+    <string name="imagen_de_morty">imagen de morty</string>
+    <string name="imagen_de_jerry">imagen de jerry</string>
+    <string name="imagen_de_summer">imagen de summer</string>
+    <string name="imagen_de_beth">imagen de beth</string>
+    <string name="imagen_de_rick">imagen de rick</string>
 </resources>
