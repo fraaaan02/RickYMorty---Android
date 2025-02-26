@@ -29,5 +29,4 @@ class Preferencias (content: Context) {
     fun fetchOscureMode() : Boolean = preferences.getBoolean(
         SHARE_FIELD_MODO_OSCURO, false
     )
-
 }

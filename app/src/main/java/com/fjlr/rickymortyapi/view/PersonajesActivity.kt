@@ -1,6 +1,7 @@
 package com.fjlr.rickymortyapi.view
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,10 @@ import com.fjlr.rickymortyapi.model.api.PersonajeApi
 import com.fjlr.rickymortyapi.model.data.Characters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -75,20 +79,53 @@ class PersonajesActivity : AppCompatActivity() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
+
+    /**
+     *
+     */
     private fun loadCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val personaje = getRetrofit().create(PersonajeApi::class.java).getPersonajes()
+                val episode = getRetrofit()
+                    .create(PersonajeApi::class.java)
+                    .getPersonajeForId(getIdIntent())
 
 
+//              Obtener los IDs de los personajes a partir de sus URLs
+                val personajeIds = episode.characters.map { url ->
+                    url.split("/").last().toInt()
+                }
+
+//              Realizar llamadas en paralelo para obtener la información de los personajes
+                val deferredPersonajes = personajeIds.map { id ->
+                    async (Dispatchers.IO) {
+                        getRetrofit()
+                            .create(PersonajeApi::class.java)
+                            .getDetailPersonaje(id) // Aquí asegúrate de que `getPersonajes` devuelva un objeto `Character`
+                    }
+                }
+
+                // Esperamos a que todas las llamadas finalicen y obtenemos la lista de personajes
+                val personajesList = deferredPersonajes.awaitAll()
+
+                withContext(Dispatchers.Main) {
+                    personajes.clear()
+                    personajes.addAll(personajesList)
+                    personajeAdapter.notifyDataSetChanged()
+                }
 
             } catch (e: Exception) {
-                launch(Dispatchers.Main) {
-                    defaultToast("Error al cargar las temporadas")
+                withContext(Dispatchers.Main) {
+                    defaultToast("Error al cargar los Personajes: ${e.message}")
+                    Log.e("ERROR_LOAD_CHARACTERS", e.toString())
                 }
             }
         }
     }
+
+
+    private fun getIdIntent(): Int = intent.getIntExtra("ID", -1)
+
 
     /**
      * Go to Main Activity

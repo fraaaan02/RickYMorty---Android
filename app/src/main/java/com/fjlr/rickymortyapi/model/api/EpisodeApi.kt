@@ -13,10 +13,4 @@ interface EpisodeApi {
 
     @GET("episode")
     suspend fun getEpisodesForSeason(@Query("episode") season: String): Api
-
-    @GET("episode")
-    suspend fun getAllEpisodes(): Api
-
-    @GET("episode")
-    suspend fun getEpisodes(@Query("page") page: Int): Api
 }
