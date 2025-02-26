@@ -11,12 +11,12 @@
         android:id="@+id/tvTituloPersonajes"
         android:layout_width="130dp"
         android:layout_height="51dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="128dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="124dp"
+        android:text="@string/personajes"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Personajes" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvNombreEpisodio"
@@ -25,10 +25,10 @@
         android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewPersonaje"
         app:layout_constraintEnd_toStartOf="@+id/tvEpisodio"
-        app:layout_constraintHorizontal_bias="0.867"
+        app:layout_constraintHorizontal_bias="0.663"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTituloPersonajes"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.641"
         tools:text="Nombre Episodio" />
 
     <TextView
@@ -36,11 +36,11 @@
         android:layout_width="154dp"
         android:layout_height="34dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="36dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewPersonaje"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTituloPersonajes"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.644"
         tools:text="Episodio" />
 
     <Button

@@ -15,5 +15,6 @@ data class Characters (
     @SerializedName("origin") val origin: OriginCharacters,
     @SerializedName("location") val location: LocationCharacters,
     @SerializedName("image") val image: String,
-    @SerializedName("created") val created: String
+    @SerializedName("created") val created: String,
+    @SerializedName("url") val url: String
 )

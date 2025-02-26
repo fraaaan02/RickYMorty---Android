@@ -16,6 +16,9 @@
         android:theme="@style/Theme.RickYMortyAPI"
         tools:targetApi="31">
         <activity
+            android:name=".view.PersonajeDetalleActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.AjustesActivity"
             android:exported="false" />
         <activity

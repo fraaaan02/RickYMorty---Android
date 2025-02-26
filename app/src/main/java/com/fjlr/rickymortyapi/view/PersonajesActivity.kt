@@ -1,5 +1,6 @@
 package com.fjlr.rickymortyapi.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -52,10 +53,17 @@ class PersonajesActivity : AppCompatActivity() {
      * Collect the episode selected
      */
     private fun initRecyclerView() {
-        personajeAdapter = PersonajeAdapter(personajes)
+        personajeAdapter = PersonajeAdapter(personajes) { onclickListener(it) }
 
         binding.recyclerViewPersonaje.layoutManager = LinearLayoutManager(this)
         binding.recyclerViewPersonaje.adapter = personajeAdapter
+    }
+
+
+    private fun onclickListener(personaje: Characters) {
+        val intent = Intent(this, PersonajeDetalleActivity::class.java)
+        intent.putExtra("ID", personaje.id)
+        startActivity(intent)
     }
 
 
@@ -90,18 +98,15 @@ class PersonajesActivity : AppCompatActivity() {
                     .create(PersonajeApi::class.java)
                     .getPersonajeForId(getIdIntent())
 
-
-//              Obtener los IDs de los personajes a partir de sus URLs
                 val personajeIds = episode.characters.map { url ->
                     url.split("/").last().toInt()
                 }
 
-//              Realizar llamadas en paralelo para obtener la información de los personajes
                 val deferredPersonajes = personajeIds.map { id ->
-                    async (Dispatchers.IO) {
+                    async(Dispatchers.IO) {
                         getRetrofit()
                             .create(PersonajeApi::class.java)
-                            .getDetailPersonaje(id) // Aquí asegúrate de que `getPersonajes` devuelva un objeto `Character`
+                            .getDetailPersonaje(id)
                     }
                 }
 
@@ -109,6 +114,9 @@ class PersonajesActivity : AppCompatActivity() {
                 val personajesList = deferredPersonajes.awaitAll()
 
                 withContext(Dispatchers.Main) {
+                    binding.tvNombreEpisodio.text = episode.name
+                    binding.tvEpisodio.text = episode.episode
+
                     personajes.clear()
                     personajes.addAll(personajesList)
                     personajeAdapter.notifyDataSetChanged()

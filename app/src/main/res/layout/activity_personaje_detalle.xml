@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.PersonajeDetalleActivity">
+
+    <Button
+        android:id="@+id/btVolverDetalle"
+        android:layout_width="115dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/volver"
+        app:layout_constraintBottom_toTopOf="@+id/ivImagenPersonaje"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.133" />
+
+    <ImageView
+        android:id="@+id/ivImagenPersonaje"
+        android:layout_width="116dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="176dp"
+        android:contentDescription="@string/imagen_del_personaje"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPersonajeName"
+        android:layout_width="148dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivImagenPersonaje"
+        tools:text="PersonajeName" />
+
+    <TextView
+        android:id="@+id/tvPersonajeEstado"
+        android:layout_width="148dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPersonajeName"
+        tools:text="PersonajeEstado" />
+
+    <TextView
+        android:id="@+id/tvPersonajeLugar"
+        android:layout_width="148dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPersonajeEstado"
+        tools:text="PersonajeLugar" />
+
+    <TextView
+        android:id="@+id/tvPersonajeUrl"
+        android:layout_width="148dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPersonajeLugar"
+        tools:text="PersonajeUrl" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

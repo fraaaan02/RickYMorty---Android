@@ -18,6 +18,7 @@ import com.fjlr.rickymortyapi.model.data.Episode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -89,10 +90,10 @@ class EpisodiosActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val temporada = getRetrofit().create(EpisodeApi::class.java).getTemporadas()
+                withContext(Dispatchers.Main) {
 
-                if (temporada.results.isNotEmpty()) {
+                    if (temporada.results.isNotEmpty()) {
 
-                    launch(Dispatchers.Main) {
                         val spinnerAdapter = ArrayAdapter(
                             this@EpisodiosActivity,
                             android.R.layout.simple_spinner_item,
@@ -103,9 +104,9 @@ class EpisodiosActivity : AppCompatActivity() {
 
                         loadEpisode()
 
+                    } else {
+                        defaultToast("Error al cargar las temporadas")
                     }
-                } else {
-                    defaultToast("Error al cargar las temporadas")
                 }
             } catch (e: Exception) {
                 launch(Dispatchers.Main) {
@@ -130,7 +131,7 @@ class EpisodiosActivity : AppCompatActivity() {
                     .getEpisodesForSeason(temporadaFormat)
 
                 if (episodios.results.isNotEmpty()) {
-                    launch(Dispatchers.Main) {
+                    withContext(Dispatchers.Main) {
                         episodes.clear()
                         episodes.addAll(episodios.results)
                         episodeAdapter.notifyDataSetChanged()
@@ -177,7 +178,7 @@ class EpisodiosActivity : AppCompatActivity() {
     /**
      * Go to Main Activity
      */
-    private fun goToMain(){
+    private fun goToMain() {
         binding.btVolverEpisodio.setOnClickListener {
             finish()
         }

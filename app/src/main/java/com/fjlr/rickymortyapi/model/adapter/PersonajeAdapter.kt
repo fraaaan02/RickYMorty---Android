@@ -9,7 +9,7 @@ import com.fjlr.rickymortyapi.databinding.ItemPersonajeBinding
 import com.fjlr.rickymortyapi.model.data.Characters
 import com.squareup.picasso.Picasso
 
-class PersonajeAdapter (private var personaje: List<Characters>):
+class PersonajeAdapter (private var personaje: List<Characters>, private val fn: (Characters) ->  Unit):
 RecyclerView.Adapter<PersonajeAdapter.PersonajeAdapterViewHolder>(){
 
     inner class PersonajeAdapterViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -21,6 +21,9 @@ RecyclerView.Adapter<PersonajeAdapter.PersonajeAdapterViewHolder>(){
             binding.tvLugar.text = personaje.location.name
             binding.tvUrl.text = personaje.created
             Picasso.get().load(personaje.image).into(binding.ivImagen)
+
+            //Configuration the listener of clicks in the list of the element
+            itemView.setOnClickListener{fn(personaje)}
         }
     }
 
