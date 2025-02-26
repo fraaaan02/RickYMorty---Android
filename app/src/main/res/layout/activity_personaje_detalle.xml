@@ -7,29 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".view.PersonajeDetalleActivity">
 
+
+    <ImageView
+        android:id="@+id/ivTituloDetalle"
+        android:layout_width="301dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/imagen_detalles"
+        android:src="@drawable/detalles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btVolverDetalle"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/btVolverDetalle"
-        android:layout_width="115dp"
-        android:layout_height="57dp"
+        android:layout_width="96dp"
+        android:layout_height="53dp"
         android:layout_marginTop="36dp"
         android:text="@string/volver"
         app:layout_constraintBottom_toTopOf="@+id/ivImagenPersonaje"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.133" />
+        app:layout_constraintVertical_bias="0.132" />
 
     <ImageView
         android:id="@+id/ivImagenPersonaje"
         android:layout_width="116dp"
         android:layout_height="106dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="56dp"
         android:contentDescription="@string/imagen_del_personaje"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ivTituloDetalle" />
 
     <TextView
         android:id="@+id/tvPersonajeName"

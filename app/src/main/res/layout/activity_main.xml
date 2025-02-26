@@ -12,73 +12,72 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="124dp"
+        android:contentDescription="@string/imagen_de_rick"
         android:src="@drawable/rick"
         app:layout_constraintBottom_toTopOf="@+id/fotoJerry"
-        app:layout_constraintEnd_toStartOf="@+id/tvTitulo"
-        app:layout_constraintHorizontal_bias="0.658"
-        android:contentDescription="@string/imagen_de_rick"
+        app:layout_constraintStart_toEndOf="@+id/fotoMorty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.543" />
 
     <ImageView
         android:id="@+id/fotoMorty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="116dp"
+        android:layout_marginEnd="92dp"
+        android:contentDescription="@string/imagen_de_morty"
         android:src="@drawable/morty"
         app:layout_constraintBottom_toTopOf="@+id/fotoSummer"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="@string/imagen_de_morty"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvTitulo"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.316" />
 
     <ImageView
         android:id="@+id/fotoJerry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="228dp"
-        android:src="@drawable/jerry"
+        android:layout_marginBottom="224dp"
         android:contentDescription="@string/imagen_de_jerry"
+        android:src="@drawable/jerry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/fotoBeth"
-        app:layout_constraintHorizontal_bias="0.297"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/fotoSummer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="72dp"
         android:contentDescription="@string/imagen_de_summer"
         android:src="@drawable/summer"
         app:layout_constraintBottom_toTopOf="@+id/fotoBeth"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.724"
         app:layout_constraintStart_toEndOf="@+id/fotoBeth" />
 
     <ImageView
         android:id="@+id/fotoBeth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="88dp"
         android:contentDescription="@string/imagen_de_beth"
         android:src="@drawable/beth"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <ImageView
         android:id="@+id/tvTitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="@string/bienvenido_rickymorty_api"
+        android:layout_width="406dp"
+        android:layout_height="211dp"
+        android:contentDescription="@string/imagen_titulo"
+        android:src="@drawable/titulo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.416"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,7 +85,7 @@
         android:id="@+id/btTemporadas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="124dp"
         android:text="@string/temporadas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

@@ -7,16 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".view.PersonajesActivity">
 
-    <TextView
-        android:id="@+id/tvTituloPersonajes"
-        android:layout_width="130dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="124dp"
-        android:text="@string/personajes"
-        android:textSize="20sp"
+    <ImageView
+        android:id="@+id/ivTituloPersonajes"
+        android:layout_width="241dp"
+        android:layout_height="138dp"
+        android:layout_marginEnd="84dp"
+        android:contentDescription="@string/imagen_personajes"
+        android:src="@drawable/personaje"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivCaracteristicas"
+        android:layout_width="305dp"
+        android:layout_height="259dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/caracteristicas_episodio"
+        android:src="@drawable/caracteristicasepisodio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivTituloPersonajes" />
 
     <TextView
         android:id="@+id/tvNombreEpisodio"
@@ -27,7 +37,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tvEpisodio"
         app:layout_constraintHorizontal_bias="0.663"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTituloPersonajes"
+        app:layout_constraintTop_toBottomOf="@+id/ivTituloPersonajes"
         app:layout_constraintVertical_bias="0.641"
         tools:text="Nombre Episodio" />
 
@@ -39,7 +49,7 @@
         android:layout_marginEnd="36dp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewPersonaje"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTituloPersonajes"
+        app:layout_constraintTop_toBottomOf="@+id/ivTituloPersonajes"
         app:layout_constraintVertical_bias="0.644"
         tools:text="Episodio" />
 
@@ -47,10 +57,10 @@
         android:id="@+id/btVolverPersonaje"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:text="@string/volver"
-        app:layout_constraintEnd_toStartOf="@+id/tvTituloPersonajes"
+        app:layout_constraintEnd_toStartOf="@+id/ivTituloPersonajes"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -13,4 +13,9 @@
     <string name="imagen_de_summer">imagen de summer</string>
     <string name="imagen_de_beth">imagen de beth</string>
     <string name="imagen_de_rick">imagen de rick</string>
+    <string name="imagen_titulo">imagen titulo</string>
+    <string name="imagen_temporadas">imagen temporadas</string>
+    <string name="imagen_personajes">imagen personajes</string>
+    <string name="imagen_detalles">imagen detalles</string>
+    <string name="caracteristicas_episodio">caracteristicas episodio</string>
 </resources>

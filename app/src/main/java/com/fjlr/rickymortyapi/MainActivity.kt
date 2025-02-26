@@ -45,20 +45,22 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AjustesActivity::class.java))
         }
 
-        imageNight()
 
+        setImageForMode(findViewById(R.id.fotoMorty), R.drawable.morty, R.drawable.mortynight)
+        setImageForMode(findViewById(R.id.fotoRick), R.drawable.rick, R.drawable.ricknight)
+        setImageForMode(findViewById(R.id.fotoSummer), R.drawable.summer, R.drawable.summernight)
+        setImageForMode(findViewById(R.id.fotoBeth), R.drawable.beth, R.drawable.bethnight)
+        setImageForMode(findViewById(R.id.fotoJerry), R.drawable.jerry, R.drawable.jerrynight)
     }
 
-    private fun imageNight(){
-        val imageView: ImageView = binding.fotoBeth
+    /**
+     * Set image for mode (light or dark)
+     */
+    private fun setImageForMode(imageView: ImageView, lightImage: Int, darkImage: Int) {
         val modoOscuro = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-
-        if (modoOscuro == Configuration.UI_MODE_NIGHT_YES) {
-            imageView.setImageResource(R.drawable.bethnight) // Imagen con mejor contraste
-        } else {
-            imageView.setImageResource(R.drawable.beth) // Imagen normal
-        }
-
+        val selectedImage = if (modoOscuro == Configuration.UI_MODE_NIGHT_YES) darkImage else lightImage
+        imageView.setImageResource(selectedImage)
     }
+
 
 }
