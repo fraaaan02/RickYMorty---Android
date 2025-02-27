@@ -1,8 +1,8 @@
-#Rick and Morty Explorer
+# Rick and Morty Explorer
 
 Rick and Morty Explorer es una aplicación para Android desarrollada en Kotlin que permite explorar los episodios y personajes de la serie "Rick and Morty" a través de su API oficial.
 
-##Características
+## Características
 
 Modo oscuro: Opción para cambiar entre modo claro y oscuro en la configuración.
 
@@ -12,7 +12,7 @@ Listado de personajes: Muestra todos los personajes que aparecen en un episodio 
 
 Detalles de personajes: Al seleccionar un personaje, se muestra su información detallada.
 
-##Tecnologías y Dependencias
+## Tecnologías y Dependencias
 
 La aplicación usa las siguientes bibliotecas:
 
@@ -24,6 +24,6 @@ Coroutines: Para manejar operaciones asíncronas de manera eficiente.
 
 Picasso: Para la carga y visualización de imágenes de los personajes.
 
-##API Utilizada
+## API Utilizada
 
 La aplicación consume la API oficial de Rick and Morty: https://rickandmortyapi.com/
