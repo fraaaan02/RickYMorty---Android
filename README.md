@@ -27,3 +27,6 @@ La aplicación usa las siguientes bibliotecas:
 ## API Utilizada
 
 La aplicación consume la API oficial de Rick and Morty: https://rickandmortyapi.com/
+
+## Capturas de Pantalla
+![Vista Principal](https://github.com/user-attachments/assets/1413f098-c9a1-4581-bfd3-88669388b752)
